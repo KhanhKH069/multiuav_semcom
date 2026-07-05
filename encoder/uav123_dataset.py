@@ -38,6 +38,7 @@ class UAV123Dataset(Dataset):
         seq_root: str = "data_seq/UAV123",
         anno_root: str = "anno/UAV123",
         max_frames: int | None = None,
+        allowed_seq_names: list[str] | None = None,
     ):
         self.seq_root = seq_root
         self.anno_root = anno_root
@@ -58,6 +59,9 @@ class UAV123Dataset(Dataset):
             if os.path.isdir(os.path.join(seq_root, d))
         )
         self.seq_to_id = {name: idx for idx, name in enumerate(seq_names)}
+
+        if allowed_seq_names is not None:
+            seq_names = [s for s in seq_names if s in allowed_seq_names]
 
         print(f"[INFO] Tim thay {len(seq_names)} sequence: {seq_names[:5]} ...")
 
