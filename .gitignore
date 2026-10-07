@@ -1,15 +1,39 @@
 # Python-generated files
 __pycache__/
-*.py[oc]
+*.py[cod]
+*$py.class
+*.so
+
+# Packages
 build/
 dist/
 wheels/
 *.egg-info
+.eggs/
 
 # Virtual environments
 .venv
+venv/
+env/
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+.DS_Store
 
 # Datasets and checkpoints
 data/
 data_seq/
+anno/
 checkpoints/
+*.pth
+*.pt
+
+# Results and Logs
+results/
+*.log
+
+# Pytest / Mypy
+.pytest_cache/
+.mypy_cache/

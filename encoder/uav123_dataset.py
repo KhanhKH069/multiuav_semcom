@@ -9,9 +9,6 @@ Dataset class cho UAV123 voi cau truc thu muc thuc te cua du an:
 Vi mot so sequence bi tach thanh nhieu phan (vd car1_1, car1_2, car1_3),
 class nay tu dong quet tat ca file annotation khop voi ten thu muc.
 """
-import sys, io
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
-
 import os
 import glob
 import cv2

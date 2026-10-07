@@ -1,7 +1,7 @@
 [project]
 name = "multiuav-semcom"
 version = "0.1.0"
-description = "Add your description here"
+description = "Task-Oriented Semantic Communication for Multi-UAV Cooperative Tracking"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
@@ -9,6 +9,7 @@ dependencies = [
     "matplotlib",
     "numpy",
     "opencv-python",
+    "scipy",
     "torch",
     "torchvision",
     "tqdm>=4.68.3",

@@ -50,6 +50,15 @@ class UAVAttentionPool(nn.Module):
             scores = scores.masked_fill(~mask, float("-inf"))
 
         weights = torch.softmax(scores, dim=-1)    # [B, N]
+
+        # Guard: khi ALL UAV bị mask cùng lúc, softmax(-inf,...) = NaN
+        # → thay bằng uniform attention (1/N) để tránh NaN lan sang LSTM
+        all_masked = (mask is not None) and (~mask).all(dim=-1, keepdim=True)  # [B,1]
+        if isinstance(all_masked, torch.Tensor) and all_masked.any():
+            uniform = torch.full_like(weights, 1.0 / weights.shape[-1])
+            weights = torch.where(all_masked.expand_as(weights), uniform, weights)
+            weights = torch.nan_to_num(weights, nan=1.0 / weights.shape[-1])
+
         fused = torch.einsum("bn,bnh->bh", weights, h)  # [B, H]
         return fused
 
