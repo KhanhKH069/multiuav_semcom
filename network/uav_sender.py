@@ -16,12 +16,8 @@ import time
 from encoder.encoder import RealtimeEncoderRunner
 from network.message import make_message, encode_message
 
-
-
-
 class DummyFrameSource:
-    """Placeholder cho luồng video Tello — thay bằng djitellopy trong triển khai thực."""
-
+    
     def __init__(self):
         import numpy as np
         self._np = np
@@ -29,10 +25,8 @@ class DummyFrameSource:
     def read(self):
         return self._np.random.randint(0, 255, (480, 640, 3), dtype=self._np.uint8)
 
-
 class TelloFrameSource:
-    """Nguồn khung hình từ camera Tello thực tế."""
-
+    
     def __init__(self):
         try:
             from djitellopy import Tello
@@ -58,7 +52,6 @@ class TelloFrameSource:
             self.tello.streamoff()
         except Exception:
             pass
-
 
 def run_sender(uav_id: int, ground_ip: str, ground_port: int,
                weights_path: str | None = None, send_hz: float = 10.0, dummy: bool = True):
@@ -103,7 +96,6 @@ def run_sender(uav_id: int, ground_ip: str, ground_port: int,
         if hasattr(frame_source, "close"):
             frame_source.close()
 
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--uav-id", type=int, required=True)
@@ -115,3 +107,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     run_sender(args.uav_id, args.ground_ip, args.ground_port, args.weights, args.hz, dummy=args.dummy)
+
